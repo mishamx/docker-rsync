@@ -1,0 +1,10 @@
+#!/bin/bash
+RSFROM=${RSFROM:-rsync.from}
+RSARGS=${RSARGS:-avPurlogt}
+
+rm -f /var/run/rsyncd.pid
+
+echo "$PASSWORD" > /etc/rsync.secrets
+chmod 0400 /etc/rsync.secrets
+
+rsync -$RSARGS --password-file=/etc/rsync.secrets rsync://${USERNAME}@${RSFROM}:873/data/ /data
