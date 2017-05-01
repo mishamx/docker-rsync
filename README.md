@@ -12,7 +12,7 @@ version: '3'
 services:
 
     rsync.from:
-        build: ./rsync
+        image: mishamx/rsync:latest
         environment:
             USERNAME: $RS_USERNAME
             PASSWORD: $RS_USER_PASSWORD
@@ -23,12 +23,12 @@ services:
         volumes:
             - "$RS_PATH_FROM:/data"
 #        # For swarm
-#        deploy:
-#            placement:
-#                - node.lable.rsync == from
+        deploy:
+            placement:
+                constraints: [node.lable.rsync == from]
 
     rsync.to:
-        build: ./rsync
+        image: mishamx/rsync:latest
         environment:
             USERNAME: $RS_USERNAME
             PASSWORD: $RS_USER_PASSWORD
@@ -38,9 +38,9 @@ services:
         volumes:
             - "$RS_PATH_TO:/data"
 #        # For swarm
-#        deploy:
-#            placement:
-#                - node.lable.rsync == to
+        deploy:
+            placement:
+                constraints: [node.lable.rsync == to]
         command: /usr/local/bin/run_to
 
 networks:
