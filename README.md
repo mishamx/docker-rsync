@@ -22,7 +22,7 @@ services:
             - front
         volumes:
             - "$RS_PATH_FROM:/data"
-#        # For swarm
+        # For swarm
         deploy:
             placement:
                 constraints: [node.lable.rsync == from]
@@ -37,11 +37,11 @@ services:
             - front
         volumes:
             - "$RS_PATH_TO:/data"
-#        # For swarm
+        # For swarm
         deploy:
             placement:
                 constraints: [node.lable.rsync == to]
-        command: /usr/local/bin/run_to
+        command: /usr/bin/supervisord
 
 networks:
     front:

@@ -23,8 +23,7 @@ ADD ./docker-entrypoint.sh /docker-entrypoint.sh
 EXPOSE 873
 
 RUN crontab /etc/cron \
-	&& chmod +x /docker-entrypoint.sh \
-	&& usermod -u 1000 www-data
+	&& chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
